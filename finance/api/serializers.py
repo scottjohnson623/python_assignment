@@ -25,7 +25,7 @@ class FinancialDataApiRequestSerializer(serializers.Serializer):
 
 
 class StatisticsApiRequestSerializer(serializers.Serializer):
-    symbol = serializers.CharField(min_length=1, max_length=12, required=False)
+    symbol = serializers.CharField(min_length=1, max_length=12)
     start_date = serializers.DateField(allow_null=True)
     end_date = serializers.DateField(allow_null=True)
 

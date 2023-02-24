@@ -13,9 +13,9 @@ docker-compose build
 ```
 4. After building, in the same terminal run 
 ```
-docker-compose up
+docker-compose up -d
 ```
-5. Now that your docker instance is running, we next need to find the container that is running our backend service. Either through the Docker desktop app or from using `docker ps` in your terminal, find the container ID for our backend instance, the name should be `python_assignment-web-1` . After locating the container ID, open up an interactive terminal 
+5. Now that your docker instance is running, we next need to find the container that is running our backend service. Either through the Docker desktop app or from using `docker ps` in your terminal, find the container ID for our backend instance, the name should be `python_assignment-web-1` . After locating the container ID, open up an interactive terminal in it with 
 ```
 docker exec -it <container image> bash
 ```
