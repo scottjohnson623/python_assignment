@@ -2,6 +2,7 @@ from django.conf import settings
 from datetime import date
 from django.core.management.base import BaseCommand
 from api.models import FinancialData
+from ...serializers import FinancialDataSerializer
 import requests
 
 
@@ -23,19 +24,29 @@ class Command(BaseCommand):
                 if (current_date - date.fromisoformat(day)).days >= 14:
                     break
                 day_data = json_data[day]
-                open_price = float(day_data["1. open"])
-                close_price = float(day_data["4. close"])
-                volume = int(day_data["6. volume"])
-                financial_data_model = FinancialData(
-                    symbol=symbol,
-                    date=day,
-                    open_price=open_price,
-                    close_price=close_price,
-                    volume=volume,
+
+                validator = FinancialDataSerializer(
+                    data={
+                        "date": day,
+                        "symbol": symbol,
+                        "open_price": day_data["1. open"],
+                        "close_price": day_data["4. close"],
+                        "volume": day_data["6. volume"],
+                    }
                 )
-                print(financial_data_model)
-                new_financial_data_models.append(financial_data_model)
+                try:
+                    validator.is_valid(raise_exception=True)
+                    new_financial_data_models.append(
+                        FinancialData(**validator.validated_data)
+                    )
+                except:
+                    print(
+                        f"there was a problem with the data from {day}: {validator.errors}"
+                    )
 
         FinancialData.objects.bulk_create(
             new_financial_data_models, ignore_conflicts=True
+        )
+        self.stdout.write(
+            self.style.SUCCESS("Finished importing data from Alphavantage API")
         )

@@ -26,7 +26,7 @@ class FinancialData(models.Model):
             )
         ]
 
-    symbol = models.CharField(max_length=6)
+    symbol = models.CharField(max_length=12)
     date = models.DateField()
     open_price = models.FloatField()
     close_price = models.FloatField()

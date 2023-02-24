@@ -9,7 +9,7 @@ class FinancialDataSerializer(serializers.ModelSerializer):
 
 
 class FinancialDataApiRequestSerializer(serializers.Serializer):
-    symbol = serializers.CharField(min_length=1, max_length=4, required=False)
+    symbol = serializers.CharField(min_length=1, max_length=12, required=False)
     start_date = serializers.DateField(allow_null=True, required=False)
     end_date = serializers.DateField(allow_null=True, required=False)
 
@@ -25,7 +25,7 @@ class FinancialDataApiRequestSerializer(serializers.Serializer):
 
 
 class StatisticsApiRequestSerializer(serializers.Serializer):
-    symbol = serializers.CharField(min_length=1, max_length=4)
+    symbol = serializers.CharField(min_length=1, max_length=12, required=False)
     start_date = serializers.DateField(allow_null=True)
     end_date = serializers.DateField(allow_null=True)
 
