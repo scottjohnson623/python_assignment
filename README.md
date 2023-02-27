@@ -6,7 +6,7 @@ This app gathers data about securities (IBM and APPL to start). It uses Python D
 This project utilizes Docker, so please make sure you have it installed already
 
 1. If you do not have an API key for Alphavantage, please get one at https://www.alphavantage.co/support/#api-key
-2. rename `.env.example` to `.env`, and change the value of `ALPHAVANTAGE_API_KEY` to your api key
+2. In `finance/finance/`, rename `.env.example` to `.env`, and change the value of `ALPHAVANTAGE_API_KEY` to your api key
 3. In your terminal in the repository root directory, run 
 ```
 docker-compose build
